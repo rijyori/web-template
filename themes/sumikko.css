@@ -1,0 +1,30 @@
+/* 스밋코구라시 파스텔 (oishi에서 시작, pwa-games·rijyori.com 홈페이지에서 씀)
+   테마 파일 약속 (README "테마 추가하기"): 아래 변수를 라이트 / 다크 둘 다 정의한다.
+   다크는 두 군데 — 시스템이 다크이고 사용자가 라이트를 고르지 않았을 때, 사용자가 다크를 골랐을 때. */
+:root {
+  --font: "Pretendard", "Hiragino Kaku Gothic ProN", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color-scheme: light;
+  --bg: #faf5ec; --panel: #fffdf8; --panel2: #f2e9da; --line: #e3d6c1;
+  --fg: #5f5247; --dim: #87735f; --accent: #b4622f; --warn: #c25f5f;
+  --hover: #f6eee0; --shadow: rgba(120,100,80,.18);
+  --t1: #e8b9a0; --t2: #bcd3c4; --t3: #c9d4e6; --t4: #ded0e6;   /* 복숭아·민트·하늘·라벤더 */
+  --grid: #a08b74; --user: #5878a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #2b2521; --panel: #342d28; --panel2: #3e3630; --line: #4b4139;
+    --fg: #ece1d1; --dim: #a8967f; --accent: #e8ab7c; --warn: #e09b9b;
+    --hover: #443b33; --shadow: rgba(0,0,0,.5);
+    --t1: #7d5443; --t2: #42604f; --t3: #41506b; --t4: #544365;
+    --grid: #7a6a58; --user: #a9bde0;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #2b2521; --panel: #342d28; --panel2: #3e3630; --line: #4b4139;
+  --fg: #ece1d1; --dim: #a8967f; --accent: #e8ab7c; --warn: #e09b9b;
+  --hover: #443b33; --shadow: rgba(0,0,0,.5);
+  --t1: #7d5443; --t2: #42604f; --t3: #41506b; --t4: #544365;
+  --grid: #7a6a58; --user: #a9bde0;
+}

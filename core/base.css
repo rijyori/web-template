@@ -1,0 +1,99 @@
+/* 공용 바탕·부품. 원본: web-template/core/base.css
+   색·폰트는 전부 테마 변수(themes/*.css)로만 쓴다 — 테마를 바꿔 끼우면 그대로 따라간다.
+   부품: 테마 토글(.theme), 둥근 버튼(.round-btn), 메뉴 버튼(.menu-btn), 모달(.modal), 토스트(.toast) */
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; padding: 0; }
+a { color: var(--accent); }
+[hidden] { display: none !important; }
+
+/* ---------- 테마 토글: 자동 / 라이트 / 다크 (core/theme.js가 동작을 붙인다) ---------- */
+.theme {
+  display: inline-flex;
+  border: 1px solid var(--line); border-radius: 999px; overflow: hidden;
+  background: var(--panel);
+}
+.theme button {
+  color: var(--dim);
+  font-size: 13px; padding: 6px 14px; line-height: 1.2;
+}
+.theme button[aria-pressed="true"] { background: var(--t1); color: var(--fg); font-weight: 700; }
+.theme button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* 오른쪽 위 고정 자리 (노치 피함) */
+.theme.corner { position: absolute; top: calc(env(safe-area-inset-top) + 16px); right: 16px; z-index: 5; }
+
+/* ---------- 둥근 버튼 (아이콘 하나) ---------- */
+.round-btn {
+  width: 54px; height: 54px; flex: none;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--accent);
+  display: grid; place-items: center;
+  box-shadow: 0 3px 0 var(--shadow);
+}
+.round-btn svg { width: 28px; height: 28px; }
+.round-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--shadow); }
+
+/* ---------- 메뉴 버튼 (큰 선택지). 배경은 t1~t4 중 하나: class="menu-btn t2" ---------- */
+.menu-btn {
+  display: block; width: 100%; max-width: 320px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  font-size: 22px; font-weight: 800; text-align: center; text-decoration: none; color: var(--fg);
+  box-shadow: 0 4px 0 var(--shadow);
+  transition: transform .08s;
+}
+.menu-btn.t1 { background: var(--t1); } .menu-btn.t2 { background: var(--t2); }
+.menu-btn.t3 { background: var(--t3); } .menu-btn.t4 { background: var(--t4); }
+.menu-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--shadow); }
+
+/* ---------- 모달 ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 10;
+  background: rgba(40,30,20,.45);
+  display: grid; place-items: center;
+  padding: 24px;
+}
+.modal-box {
+  background: var(--panel); color: var(--fg);
+  border: 1px solid var(--line);
+  width: 100%; max-width: 340px;
+  border-radius: 22px;
+  padding: 26px 22px 20px;
+  text-align: center;
+  box-shadow: 0 8px 24px var(--shadow);
+  animation: rise .2s ease-out;
+}
+@keyframes rise { from { transform: translateY(20px); opacity: 0; } }
+.modal-box h2 { margin: 0 0 8px; font-size: 26px; font-weight: 900; }
+.modal-box p { margin: 0 0 20px; font-size: 15px; color: var(--dim); line-height: 1.5; white-space: pre-line; }
+.modal-actions { display: flex; flex-direction: column; gap: 10px; }
+.modal-actions button {
+  padding: 14px; border-radius: 14px; font-size: 17px; font-weight: 800;
+  background: var(--t1); color: var(--fg);
+}
+.modal-actions button.secondary { background: var(--panel2); color: var(--dim); }
+
+/* ---------- 토스트 (아래쪽 짧은 알림) ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom));
+  transform: translate(-50%, 20px);
+  background: var(--fg); color: var(--bg);
+  padding: 10px 18px; border-radius: 20px;
+  font-size: 14px; font-weight: 700;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  z-index: 20; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
